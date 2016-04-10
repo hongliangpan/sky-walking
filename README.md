@@ -7,6 +7,7 @@ SkyWalking: Large-Scale Distributed Systems Tracing Infrastructure, 是一个对
 
 [![Build Status](https://travis-ci.org/wu-sheng/sky-walking.svg?branch=master)](https://travis-ci.org/wu-sheng/sky-walking)
 
+# 简介 / abstract
 * 核心理论为[Google Dapper论文：Dapper, a Large-Scale Distributed Systems Tracing Infrastructure](http://research.google.com/pubs/pub36356.html),英语有困难的同学可参考[国内翻译](http://duanple.blog.163.com/blog/static/70971767201329113141336/)
 * 本分析系统能通过不修改或少量修改代码的模式，对现有的JAVA应用或J2EE应用进行监控和数据收集，并针对应用进场进行准实时告警。此外提供大量的调用性能分析功能，解决目前的监控系统主要监控进程、端口而非应用实际性能的问题。
 * 支持国内常用的dubbo以及dubbox等常见RPC框架，支持应用异常的邮件告警
@@ -35,12 +36,12 @@ SkyWalking: Large-Scale Distributed Systems Tracing Infrastructure, 是一个对
 # 新版本能力规划
 * 提供一定的日志数据分析和展现能力，减少或者避免使用团队的二次开发
 
-# 主要贡献者
-* 吴晟 &nbsp;&nbsp;[亚信](http://www.asiainfo.com/) wusheng@asiainfo.com
-* 张鑫 &nbsp;&nbsp;[亚信](http://www.asiainfo.com/) zhangxin10@asiainfo.com
+# 主要贡献者 / Contributors
+* 吴晟 [wusheng](https://github.com/wu-sheng) &nbsp;&nbsp;[亚信 Asiainfo](http://www.asiainfo.com/) wusheng@asiainfo.com
+* 张鑫 [zhangxin](https://github.com/ascrutae) &nbsp;&nbsp;[亚信 Asiainfo](http://www.asiainfo.com/) zhangxin10@asiainfo.com
 
 # 交流
-* 联系邮箱：wu.sheng@foxmail.com
+* Mail to：wu.sheng@foxmail.com
 * QQ群：392443393，请注明“Sky Walking交流”
 * 谁在使用Sky Walking?[点击进入](https://github.com/wu-sheng/sky-walking/issues/34)。同时请各位使用者反馈下，都在哪些项目中使用。
 * if you are using SkyWalking，[Report to us](https://github.com/wu-sheng/sky-walking/issues/34) please.
@@ -49,6 +50,7 @@ SkyWalking: Large-Scale Distributed Systems Tracing Infrastructure, 是一个对
 ![整体架构图](http://wu-sheng.github.io/sky-walking/sample-code/images/skywalkingClusterDeploy.jpeg)
 
 # 典型页面展现 / Typical UI show
+* 支持浏览器：Firefox/Chrome
 ## 实时调用链路
 * 实时链路追踪展现
 ![追踪连路图1](http://wu-sheng.github.io/sky-walking/sample-code/screenshoot/callChain.png)
@@ -64,6 +66,7 @@ SkyWalking: Large-Scale Distributed Systems Tracing Infrastructure, 是一个对
 # Quick Start
 ## 编译与部署 / Build and deploy
 - 参考《[代码编译部署说明](BUILD_DOC.md)》
+- [Code compilation and deployment instructions](BUILD_DOC.md)
 
 ## 引入核心SDK / Import SDK
 - 无论试用哪种插件，都必须引入
@@ -84,7 +87,7 @@ SkyWalking: Large-Scale Distributed Systems Tracing Infrastructure, 是一个对
 </dependency>
 ```
 
-## 使用全新的main class。原main class，以及参数作为参数传入
+## 使用全新的main class
 - using new main class, instead of the original main class.
 ```shell
 #原进程启动命令：
@@ -97,7 +100,7 @@ java com.ai.cloud.skywalking.plugin.TracingBootstrap com.company.product.Startup
 ```
 
 ## 根据所需插件，配置应用程序 / Config application
-- 参考《[SDK Guides](skywalking-sdk-plugin)》
+- Ref 《[SDK Guides](skywalking-sdk-plugin)》
 - 注意：插件不会引用所需的第三方组件（如Spring、dubbo、dubbox等），请自行引入所需的版本。
 
 
@@ -117,6 +120,9 @@ export SKYWALKING_RUN=true
 # 在应用程序中显示traceid / How to find tid
 - [Find TID](HOW_TO_FIND_TID.md)
 
+# QA
+- [SkyWalking SDK是否已经工作？ Is SkyWalking SDK Running?](QA/IS_RUNNING.md)
+- [tid在web-ui上无法查询. tid can't be search on web-ui](QA/TID_CANNOT_BE_SEARCH.md)
+
 # 源代码说明
-* [追踪日志明细存储结构说明](https://github.com/wu-sheng/sky-walking/blob/master/skywalking-server/doc/hbase_table_desc.md)
-* [the storage structure of tracking logs](https://github.com/wu-sheng/sky-walking/blob/master/skywalking-server/doc/hbase_table_desc.md)
+* [追踪日志明细存储结构说明. the storage structure of tracking logs](skywalking-server/doc/hbase_table_desc.md)

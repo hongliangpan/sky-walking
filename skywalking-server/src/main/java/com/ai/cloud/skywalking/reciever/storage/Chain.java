@@ -3,16 +3,15 @@ package com.ai.cloud.skywalking.reciever.storage;
 import com.ai.cloud.skywalking.protocol.Span;
 import com.ai.cloud.skywalking.reciever.selfexamination.ServerHealthCollector;
 import com.ai.cloud.skywalking.reciever.selfexamination.ServerHeathReading;
-
-import java.util.List;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.util.List;
+
 public class Chain {
-	private static Logger logger = LogManager
+    private static Logger logger = LogManager
             .getLogger(Chain.class);
-	
+
     private List<IStorageChain> chains;
 
     private int index = 0;
@@ -25,16 +24,18 @@ public class Chain {
         if (index < chains.size()) {
             while (true) {
                 try {
-                    chains.get(index).doChain(spans, this);
-                    index++;
+                    chains.get(index++).doChain(spans, this);
                     break;
                 } catch (Throwable e) {
-                	logger.error("do chain at index[{}] failure.", index, e);
+                    logger.error("do chain at index[" + (index - 1) + "] failure.", e);
                     ServerHealthCollector.getCurrentHeathReading("storage-chain").updateData(ServerHeathReading.ERROR,
-                            "Failed to do chain action. spans list hash code:" + spans.hashCode() + ",Cause:" + e.getMessage());
+                    		"do chain at index[" + (index - 1) + "] failure. spans list hash code:" + spans.hashCode() + ",Cause:" + e.getMessage());
+                    // 如果Chain出现任何异常，将重做Chain,保证数据不丢失
+                    index--;
                 }
             }
         }
+
     }
 
     void addChain(IStorageChain chain) {
